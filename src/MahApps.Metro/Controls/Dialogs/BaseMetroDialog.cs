@@ -266,7 +266,20 @@ namespace MahApps.Metro.Controls.Dialogs
 
         internal void HandleThemeChange()
         {
-            var theme = DetectTheme(this);
+            Theme theme = null;
+
+            if (DialogSettings.CustomResourceDictionary != null && DialogSettings.CustomResourceDictionary.Contains("Theme.Instance"))
+            {                
+                if (DialogSettings.CustomResourceDictionary["Theme.Instance"] is Theme t)
+                {
+                    theme = t;
+                }
+            }
+            else
+            {
+                theme = DetectTheme(this);
+            }
+            
 
             if (System.ComponentModel.DesignerProperties.GetIsInDesignMode(this)
                 || theme == null)
